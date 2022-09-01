@@ -1,0 +1,27 @@
+[build-system]
+# Minimum requirements for the build system to execute. (see https://www.python.org/dev/peps/pep-0518/)
+requires = ["setuptools", "wheel"]  # PEP 508 specifications.
+
+[tool.black]
+line-length = 110
+target-version = ['py39']
+
+[tool.mypy]
+exclude = [
+    'tests/unit/*.py',  # but TOML's single-quoted strings do not
+]
+
+[pycalver]
+current_version = "0.1.0rc1"
+version_pattern = "{MAJOR}.{MINOR}.{PATCH}{RELEASE_TAG}"
+commit = true
+tag = true
+push = true
+
+[pycalver.file_patterns]
+"pyproject.toml" = [
+        'current_version = "{MAJOR}.{MINOR}.{PATCH}{RELEASE_TAG}"',
+    ]
+"setup.py" = [
+    'version="{MAJOR}.{MINOR}.{PATCH}{RELEASE_TAG}"'
+]
